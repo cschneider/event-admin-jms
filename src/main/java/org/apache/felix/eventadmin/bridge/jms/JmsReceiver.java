@@ -18,6 +18,7 @@
  */
 package org.apache.felix.eventadmin.bridge.jms;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.jms.Connection;
@@ -61,7 +62,15 @@ public class JmsReceiver extends JmsSupport implements MessageListener {
 	private Event mapMessageToEvent(Message message) throws JMSException {
 		Topic jmsTopic = (Topic) message.getJMSDestination();
 		String topic = mapJmsTopicToEventTopic(jmsTopic);
-		Hashtable<String, String> props = new Hashtable<String, String>();
+		Hashtable<String, Object> props = new Hashtable<String, Object>();
+		@SuppressWarnings("unchecked")
+		Enumeration<String> keys = message.getPropertyNames();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			Object value = message.getObjectProperty(key);
+			props.put(key, value);
+		}
+		props.put(FROM_REMOTE, new Boolean(true));
 		return new Event(topic, props);
 	}
 

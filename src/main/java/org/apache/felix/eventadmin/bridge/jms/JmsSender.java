@@ -47,7 +47,6 @@ public class JmsSender extends JmsSupport implements EventHandler {
 			return;
 		}
 		if (!shouldSend(event)) {
-			LOG.info("Ignoring event" + event.toString());
 			return;
 		}
 		Connection con = null;
@@ -89,7 +88,6 @@ public class JmsSender extends JmsSupport implements EventHandler {
 				message.setObjectProperty(key, value);
 			}
 		}
-		message.setBoolean(FROM_REMOTE, true);
 		return message;
 	}
 	
