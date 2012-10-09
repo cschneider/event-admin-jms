@@ -3,6 +3,7 @@ import java.util.Hashtable;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.felix.eventadmin.bridge.jms.JmsSender;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.osgi.service.event.Event;
 
@@ -10,6 +11,7 @@ import org.osgi.service.event.Event;
 public class SendEvent {
 
 	@Test
+	@Ignore
 	public void sendEvent() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 		JmsSender sender = new JmsSender();
