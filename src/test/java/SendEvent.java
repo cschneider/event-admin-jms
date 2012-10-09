@@ -14,7 +14,7 @@ public class SendEvent {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 		JmsSender sender = new JmsSender();
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
-		Event event = new Event("my.topic", props );
+		Event event = new Event("my/topic", props );
 		sender.setConnectionFactory(connectionFactory);
 		sender.handleEvent(event);
 	}
